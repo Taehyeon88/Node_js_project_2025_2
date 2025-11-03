@@ -3,13 +3,13 @@ CREATE DATABASE `GameTest` /*!40100 COLLATE 'utf8mb4_0900_ai_ci' */;
 
 --2.테이블 생성
 CREATE TABLE `player` (
-	`player.id` INT NOT NULL,
+	`player_id` INT NOT NULL,
 	`username` VARCHAR(50) NULL DEFAULT NULL COLLATE,
 	`email` VARCHAR(50) NULL DEFAULT NULL COLLATE ,
 	`password_hash` VARCHAR(255) NULL DEFAULT NULL COLLATE ,
 	`created.at` TIMESTAMP NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
 	`last_login` TIMESTAMP NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
-	PRIMARY KEY (`player.id`),
+	PRIMARY KEY (player_id),
 	UNIQUE INDEX `username` (`username`),
 	UNIQUE INDEX `email` (`email`)
 )
