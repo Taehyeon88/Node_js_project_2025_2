@@ -30,12 +30,16 @@ app.post('/login', async (req, res) => {
                 [players[0].player_id]
             );
         }
+        else
+        {
+            res.status(500).json({success: false, message : '로그인 실패'});
+        }
     }
     catch (error)
     {
         res.status(500).json({success: false, message : error.message});
     }
-})
+});
 
 //플레이어 인벤토리 조회
 app.get('/inventory/:playerId', async (req, res) => {
@@ -52,17 +56,17 @@ app.get('/inventory/:playerId', async (req, res) => {
     {
         res.status(500).json({success: false, message : error.message});
     }
-})
+});
 
 //퀘스트 목록 조회
-app.get("/quests/:playerId", async (req,res) => {
+app.get('/quests/:playerId', async (req,res) => {
 
-    console.log(req.params.player_id);
+    console.log(req.params.playerId);
     try
     {
         const[quests] = await pool.query(
             'SELECT q.* , pq.`STATUS` FROM player_quests pq JOIN quests q ON pq.quest_id = q.quest_id WHERE pq.player_id = 1',
-            [req.params.player_id]
+            [req.params.playerId]
         )
         res.json(quests);
     }
@@ -70,7 +74,7 @@ app.get("/quests/:playerId", async (req,res) => {
     {
         res.status(500).json({success: false, message : error.message});
     }
-});
+})
 
 const PORT = 3000;
 
